@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import BaseComponent from './BaseComponent';
 import LoadingContainer from './LoadingContainer';
+import BaseStore from './lib/BaseStore';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 
 class ProductsIndex extends BaseComponent {
@@ -15,7 +16,7 @@ class ProductsIndex extends BaseComponent {
   }
 
   getProducts () {
-    this.fetch('api/products')
+    BaseStore.fetch('api/products')
       .then(products => {
         this.setState({products: products})
         this.getProduct(products[0].id)
@@ -23,7 +24,7 @@ class ProductsIndex extends BaseComponent {
   }
 
   getProduct (id) {
-    this.fetch(`api/products/${id}`)
+    BaseStore.fetch(`api/products/${id}`)
       .then(product => this.setState({product: product}))
   }
 

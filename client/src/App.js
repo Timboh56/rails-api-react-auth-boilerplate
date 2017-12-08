@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 import './App.css';
 import BaseComponent from './BaseComponent';
 import LoginForm from './LoginForm';
 import LoadingContainer from './LoadingContainer';
 import ProductsIndex from './ProductsIndex';
-import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
+import BaseStore from './lib/BaseStore';
+import Auth from './lib/Auth';
+import NavHeader from './Header';
+
+const auth = new Auth();
 
 class App extends BaseComponent {
-  constructor() {
-    super()
-  }
 
   componentWillMount() {
-    this.fetch('api/auth/is_signed_in.json')
-      .then(data => {
-        this.setState({ signedIn: data.signed_in });
-      })
+    auth.checkUserLoggedIn.call(this)
   }
 
   render() {
@@ -29,6 +28,7 @@ class App extends BaseComponent {
     } else {
       return (
         <Container id='layout'>
+          <NavHeader />
           <LoginForm />
         </Container>
       )

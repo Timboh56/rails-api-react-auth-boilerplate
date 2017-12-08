@@ -82,6 +82,7 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.1.0)
+    cancancan (2.1.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     devise (4.3.0)
@@ -232,6 +233,7 @@ DEPENDENCIES
   activeadmin!
   acts-as-taggable-on!
   byebug
+  cancancan (~> 2.0)
   devise (> 4.x)
   faker
   foreman (~> 0.82.0)
