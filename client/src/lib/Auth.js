@@ -1,7 +1,6 @@
 import BaseStore from './BaseStore';
 import $ from 'jquery';
 import AuthStore from '../stores/AuthStore';
-const Base = new BaseStore()
 
 export default class Auth {
   constructor() {
@@ -16,18 +15,17 @@ export default class Auth {
         password: password
       }
     }
-    Base.fetch('api/sessions', {
+
+    return BaseStore.fetch('api/sessions', {
       method: 'POST',
       body: opts,
-    }).then(data => {
-      debugger
-    })
+    }).then((function(data){
+      BaseStore.setAuthenticationToken(data['authentication_token'])
+      this.loggedin = true
+    }).bind(this))
   }
 
   checkUserLoggedIn() {
-    Base.fetch('api/auth/is_signed_in.json')
-      .then(data => {
-        this.setState({ signedIn: data.signed_in })
-      })
+    return BaseStore.fetch('api/auth/is_signed_in.json')
   }
 }

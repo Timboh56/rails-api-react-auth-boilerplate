@@ -1,8 +1,9 @@
 import AuthStore from '../stores/AuthStore';
 
-const AuthHeaders = {
-  'Content-Type': 'text/json',
-  'Authorization': ''
+var AuthHeaders = {
+  'Content-Type': 'application/json',
+  'Authorization': '47120e3d8b78517645e0eb668a14cc9b',
+  'AuthenticationToken': localStorage['authentication-token']
 }
 
 const prepareFetchOptions = function(opts) {
@@ -14,10 +15,20 @@ const prepareFetchOptions = function(opts) {
   if (!opts['method'])
     opts['method'] = 'GET'
 
-    return opts
+  return opts
 }
 
-export default class BaseStore {
+class BaseStore {
+
+  constructor() {
+    this.setAuthenticationToken.bind(this)
+    this.fetch.bind(this)
+  }
+
+  setAuthenticationToken(authenticationToken) {
+    localStorage['authentication-token'] = authenticationToken
+  }
+
   fetch (endpoint, opts = {}) {
     return new Promise((resolve, reject) => {
 
@@ -30,12 +41,6 @@ export default class BaseStore {
     })
   }
 
-  createNewRequest(url) {
-    return new Request(url, {
-    	headers: new Headers({
-    		'Content-Type': 'text/json',
-        'Authorization': ''
-    	})
-    })
-  }
 }
+
+export default new BaseStore();

@@ -1,18 +1,11 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-
+import ProductsIndex from './ProductsIndex';
 const Account = () => (
   <div>
     <h2>Account</h2>
   </div>
 )
-
-const Products = () => (
-  <div>
-    <h2>Products</h2>
-  </div>
-)
-
 export default class Header extends React.Component {
   render() {
     return (
@@ -30,7 +23,7 @@ export default class Header extends React.Component {
           </div>
         </nav>
         <Route path="/account" component={Account}/>
-        <Route path="/products" component={Products}/>
+        <Route path="/products" component={ProductsIndex}/>
         { this.props.children }
       </div>
     );

@@ -8,38 +8,55 @@ const auth = new Auth()
 
 class LoginForm extends BaseComponent {
 
+  componentDidMount() {
+    let loggedIn = auth.checkUserLoggedIn().then(function(data){
+      this.setState({
+        'loggedIn': true
+      })
+    }.bind(this));
+  }
+
   handleSubmit(e) {
     let password = document.getElementById('password-field').value
     let email = document.getElementById('email-field').value
-    auth.login(email, password)
-  }
-
-  componentWillMount() {
-    this.setState({})
+    auth.login(email, password).then(function(data) {
+      this.setState({
+        'loggedIn': true
+      })
+    }.bind(this))
   }
 
   render() {
-    return(
-      <Form onSubmit={ this.handleSubmit.bind(this) }>
-        <Form.Field>
-          <label>Email</label>
-          <input id='email-field' value={ this.state.email } placeholder='Email' />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <PasswordMask
-            id="password-field"
-            name="password"
-            placeholder="Enter password"
-            value={this.state.password}
-          />
-        </Form.Field>
-        <Form.Field>
-          <Checkbox label='I agree to the Terms and Conditions' />
-        </Form.Field>
-        <Button type='submit'>Submit</Button>
-      </Form>
-    )
+    if (this.state && this.state['loggedIn'] == true) {
+      return(
+        <div classnames='flash flash-message alert alert-info'>
+          <h2> Logged In! </h2>
+        </div>
+      )
+    } else {
+
+      return(
+        <Form onSubmit={ this.handleSubmit.bind(this) }>
+          <Form.Field>
+            <label>Email</label>
+            <input id='email-field' placeholder='Email' />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <PasswordMask
+              id="password-field"
+              name="password"
+              placeholder="Enter password"
+            />
+          </Form.Field>
+          <Form.Field>
+            <Checkbox label='I agree to the Terms and Conditions' />
+          </Form.Field>
+          <Button type='submit'>Submit</Button>
+        </Form>
+      )
+
+    }
   }
 }
 

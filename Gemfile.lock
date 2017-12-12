@@ -152,6 +152,7 @@ GEM
       activerecord (>= 3.0)
     puma (3.11.0)
     rack (2.0.3)
+    rack-cors (0.4.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.6)
@@ -244,6 +245,7 @@ DEPENDENCIES
   pg
   pg_search
   puma (~> 3.0)
+  rack-cors
   rails (~> 5.0.1)
   simple_token_authentication (~> 1.0)
   spring
