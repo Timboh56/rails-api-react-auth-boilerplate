@@ -16,4 +16,3 @@ AdminUser.first_or_create!(email: 'admin@example.com', password: 'password', pas
     sku: "#{ Faker::Lorem.word }-#{ i }"
   )
 end
-Product.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
