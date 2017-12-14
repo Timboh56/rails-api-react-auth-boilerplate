@@ -27,7 +27,14 @@
   to { transform: rotate(360deg); }
 }
 
+.ui.text.container {
+  width: 30%;
+}
+
+.navlink {
+  width: 300px !important;
+}
 #layout {
-  width: 50%;
+  width: 100%;
   margin: 30px 0;
 }

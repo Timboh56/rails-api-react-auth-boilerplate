@@ -8,7 +8,7 @@ import LoadingContainer from './LoadingContainer';
 import ProductsIndex from './ProductsIndex';
 import BaseStore from './lib/BaseStore';
 import Auth from './lib/Auth';
-import NavHeader from './Header';
+import NavHeader from './NavHeader';
 
 const auth = new Auth();
 
