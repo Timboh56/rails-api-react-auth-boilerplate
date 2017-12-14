@@ -21,13 +21,19 @@ class ProductsIndex extends BaseComponent {
     if (Object.keys(CachedProducts).length === 0 && CachedProducts.constructor === Object) {
       BaseStore.fetch('api/products')
         .then(products => {
-          CachedProducts['products'] = products
-          this.setState({products: products})
+          CachedProducts['products'] = products.reduce(
+            (map, obj) => {
+              map[obj.id] = obj
+              return map
+            }, {}
+          )
+          this.setState({products: CachedProducts['products']})
           this.getProduct(products[0].id)
         })
     } else {
-      this.setState(CachedProducts)
-      this.getProduct(CachedProducts['products'][0].id)
+      this.setState({products: CachedProducts['products']})
+      let first_key = Object.keys(CachedProducts['products'])[0];
+      this.getProduct(first_key)
     }
   }
 
@@ -39,7 +45,7 @@ class ProductsIndex extends BaseComponent {
       BaseStore.fetch(`api/products/${id}`)
         .then(product => {
           this.setState({product: product})
-          CachedProducts['products'][key] = product
+          CachedProducts['products'][id]['content'] = product
         }
       )
     }
@@ -47,7 +53,6 @@ class ProductsIndex extends BaseComponent {
 
   renderProductLinks() {
     let { products, product } = this.state
-
     return Object.keys(products).map(
       (key) => {
         return (
@@ -62,7 +67,7 @@ class ProductsIndex extends BaseComponent {
     if (this.state && this.state.products && this.state.product) {
       let { products, product } = this.state;
       return (
-        <div>
+        <div className='mtl'>
           <Container text>
             <Header as='h2' icon textAlign='center'>
               <Icon name='cocktail' circular />

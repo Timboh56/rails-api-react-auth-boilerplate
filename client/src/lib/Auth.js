@@ -2,10 +2,14 @@ import BaseStore from './BaseStore';
 import $ from 'jquery';
 import AuthStore from '../stores/AuthStore';
 
-export default class Auth {
+class Auth {
   constructor() {
     this.signed_in = false;
     this.checkUserLoggedIn.bind(this);
+    this.login.bind(this);
+    this.logout.bind(this);
+
+
   }
 
   register(email, password) {
@@ -18,6 +22,8 @@ export default class Auth {
     }).then((function(data){
       BaseStore.setAuthenticationToken(data['authentication_token'])
       this.signed_in = true
+      this.email = data.email
+      return data
     }).bind(this))
   }
 
@@ -36,6 +42,26 @@ export default class Auth {
     }).then((function(data){
       BaseStore.setAuthenticationToken(data['authentication_token'])
       this.signed_in = true
+      this.email = data.email
+      return data
+    }).bind(this))
+  }
+
+  logout() {
+
+    var opts = {
+      'email': this.email
+    }
+
+    debugger
+
+    return BaseStore.fetch('api/sessions', {
+      method: 'DELETE',
+      body: opts,
+    }).then((function(data){
+      BaseStore.setAuthenticationToken(null)
+      this.signed_in = false
+      return data
     }).bind(this))
   }
 
@@ -43,3 +69,6 @@ export default class Auth {
     return BaseStore.fetch('api/auth/is_signed_in.json')
   }
 }
+
+
+export default new Auth();

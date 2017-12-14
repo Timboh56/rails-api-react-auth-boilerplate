@@ -9,7 +9,9 @@ class SessionsController < ApiController
   end
 
   def destroy
-
+    user = User.find_by(email: user_params[:email])
+    sign_out(user)
+    render json: { signed_in: false }, status: 200
   end
 
   def user_params

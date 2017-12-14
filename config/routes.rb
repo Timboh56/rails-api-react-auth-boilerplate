@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :products
     resources :users, only: [:create]
-    resources :sessions, only: [:create, :destroy]
+    resources :sessions, only: [:create, :delete, :destroy]
 
 
     scope '/auth' do

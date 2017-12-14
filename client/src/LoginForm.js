@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import BaseComponent from './BaseComponent'
-import { Button, Checkbox, Form, Container } from 'semantic-ui-react'
+import { Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
 import Auth from './lib/Auth';
 import PasswordMask from 'react-password-mask';
-
-const auth = new Auth()
 
 class LoginForm extends BaseComponent {
 
   componentDidMount() {
-    let loggedIn = auth.checkUserLoggedIn().then(function(data){
+    let loggedIn = Auth.checkUserLoggedIn().then(function(data){
       this.setState({
         'loggedIn': data.signed_in
       })
@@ -19,11 +17,17 @@ class LoginForm extends BaseComponent {
   handleSubmit(e) {
     let password = document.getElementById('password-field').value
     let email = document.getElementById('email-field').value
-    auth.login(email, password).then(function(data) {
-      this.setState({
-        'loggedIn': false,
-        'error': "Incorrect email/password combination."
-      })
+    Auth.login(email, password).then(function(data) {
+      if (data.signed_in && data.signed_in == false) {
+        this.setState({
+          'loggedIn': false,
+          'error': "Incorrect email/password combination."
+        })
+      } else {
+        this.setState({
+          'loggedIn': true
+        })
+      }
     }.bind(this))
   }
 
@@ -40,13 +44,10 @@ class LoginForm extends BaseComponent {
         <Container>
           <h2> Log in </h2>
           <Form onSubmit={ this.handleSubmit.bind(this) }>
-            <Form.Field>
-              { this.state && <div>
-                                { this.state.error }
-                            </div>
+              { this.state && this.state.error && <Message>
+                                                    { this.state.error }
+                                                </Message>
               }
-            </Form.Field>
-
             <Form.Field>
               <label>Email</label>
               <input id='email-field' placeholder='Email' />

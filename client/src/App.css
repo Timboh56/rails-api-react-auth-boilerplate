@@ -22,11 +22,30 @@
   font-size: large;
 }
 
+.mtl, .margin-top-large {
+  margin-top: 2em;
+}
+
+#nav-sidebar {
+  margin: 0 !important;
+  border: 0px;
+  border-radius: 0px;
+}
+
+#sidebar-btn {
+  width: 150px;
+  font-size: 3rem !important;
+  background: #1B1C1D;
+  color: white;
+  border-radius: 0px;
+}
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 .main-content-container {
+  padding: 0px 150px;
   min-height: 1000px;
 }
 .ui.text.container {
@@ -43,5 +62,5 @@
 }
 #layout {
   width: 100%;
-  margin: 30px 0;
+  margin: 0;
 }

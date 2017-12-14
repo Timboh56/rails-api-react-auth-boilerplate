@@ -13,12 +13,10 @@ import Auth from './lib/Auth';
 import NavHeader from './NavHeader';
 import RegistrationForm from './RegistrationForm';
 
-var auth = new Auth();
-
 class App extends BaseComponent {
 
   componentDidMount() {
-    auth.checkUserLoggedIn().then(function(data){
+    Auth.checkUserLoggedIn().then(function(data){
       this.setState(data)
     }.bind(this))
   }
