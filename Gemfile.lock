@@ -221,6 +221,8 @@ GEM
     thread_safe (0.3.6)
     tzinfo (1.2.4)
       thread_safe (~> 0.1)
+    uglifier (3.2.0)
+      execjs (>= 0.3.0, < 3)
     warden (1.2.7)
       rack (>= 1.0)
     websocket-driver (0.6.5)
@@ -252,6 +254,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   sqlite3
   tzinfo-data
+  uglifier
 
 BUNDLED WITH
    1.13.2
