@@ -9,7 +9,7 @@ require 'faker'
 #   Character.create(name: 'Luke', movie: movies.first)
 AdminUser.first_or_create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
-100.times do |i|
+5.times do |i|
   Product.create!(
     name: Faker::Name.unique.name,
     description: Faker::Lorem.paragraph,

@@ -1,24 +1,11 @@
-# README
+# Rails API + React + Devise + ActiveAdmin Boilerplate
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting started
 
-Things you may want to cover:
+Run bundle on the main directory (using ruby 2.3.1)
 
-* Ruby version
+Run npm install inside /client
 
-* System dependencies
+### Prerequisites
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Rails 5, Node, Postgres

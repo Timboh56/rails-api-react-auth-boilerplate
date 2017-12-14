@@ -11,6 +11,7 @@ import ProductsIndex from './ProductsIndex';
 import BaseStore from './lib/BaseStore';
 import Auth from './lib/Auth';
 import NavHeader from './NavHeader';
+import RegistrationForm from './RegistrationForm';
 
 var auth = new Auth();
 
@@ -32,6 +33,7 @@ class App extends BaseComponent {
               <Route path="/account" component={Account}/>
               <Route path="/products" component={ProductsIndex}/>
               <Route path="/login" component={LoginForm}/>
+              <Route path="/register" component={RegistrationForm}/>
 
               { this.props.children }
             </div>

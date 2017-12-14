@@ -8,6 +8,19 @@ export default class Auth {
     this.checkUserLoggedIn.bind(this);
   }
 
+  register(email, password) {
+    return BaseStore.fetch('api/users', {
+      method: 'POST',
+      body: {
+        'email': email,
+        'password': password
+      },
+    }).then((function(data){
+      BaseStore.setAuthenticationToken(data['authentication_token'])
+      this.signed_in = true
+    }).bind(this))
+  }
+
   login(email, password) {
 
     var opts = {

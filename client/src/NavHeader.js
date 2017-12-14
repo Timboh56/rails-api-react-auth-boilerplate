@@ -55,6 +55,10 @@ export default class NavHeader extends React.Component {
               <Icon name='home' />
               <Link to="/login">Login</Link>
             </Menu.Item>
+            <Menu.Item name='home'>
+              <Icon name='user' />
+              <Link to="/register">Register</Link>
+            </Menu.Item>
             <Menu.Item name='shop'>
               <Icon name='shop' />
               <Link to="/products">Products</Link>
