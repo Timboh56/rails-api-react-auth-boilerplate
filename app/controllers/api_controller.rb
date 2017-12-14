@@ -12,7 +12,7 @@ class ApiController < ActionController::API
   def check_authorization_header
     api_key = request.headers['Authorization']
     unless ApiKey.where(key: api_key).exists?
-      render json: { message: "Unauthorized." }, status: 402
+      render json: { message: "Unauthorized." }, status: 420
     end
   end
 

@@ -4,7 +4,8 @@ import AuthStore from '../stores/AuthStore';
 
 export default class Auth {
   constructor() {
-    this.loggedIn = false;
+    this.signed_in = false;
+    this.checkUserLoggedIn.bind(this);
   }
 
   login(email, password) {
@@ -21,7 +22,7 @@ export default class Auth {
       body: opts,
     }).then((function(data){
       BaseStore.setAuthenticationToken(data['authentication_token'])
-      this.loggedin = true
+      this.signed_in = true
     }).bind(this))
   }
 

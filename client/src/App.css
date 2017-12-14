@@ -26,13 +26,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
+.main-content-container {
+  min-height: 1000px;
+}
 .ui.text.container {
   width: 30%;
 }
+.ui.button {
+  font-size: 0.76rem;
+}
 
 .navlink {
-  width: 300px !important;
+  width: auto !important;
+  display: flex;
+  flex-wrap: wrap;
 }
 #layout {
   width: 100%;

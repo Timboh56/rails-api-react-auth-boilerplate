@@ -2,7 +2,7 @@ import AuthStore from '../stores/AuthStore';
 
 var AuthHeaders = {
   'Content-Type': 'application/json',
-  'Authorization': '47120e3d8b78517645e0eb668a14cc9b',
+  'Authorization': '71737dae55938a69970384fa44d07c47',
   'AuthenticationToken': localStorage['authentication-token']
 }
 

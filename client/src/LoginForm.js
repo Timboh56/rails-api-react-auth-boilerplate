@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import BaseComponent from './BaseComponent'
-import { Button, Checkbox, Form } from 'semantic-ui-react'
+import { Button, Checkbox, Form, Container } from 'semantic-ui-react'
 import Auth from './lib/Auth';
 import PasswordMask from 'react-password-mask';
 
@@ -11,7 +11,7 @@ class LoginForm extends BaseComponent {
   componentDidMount() {
     let loggedIn = auth.checkUserLoggedIn().then(function(data){
       this.setState({
-        'loggedIn': true
+        'loggedIn': data.signed_in
       })
     }.bind(this));
   }
@@ -21,7 +21,8 @@ class LoginForm extends BaseComponent {
     let email = document.getElementById('email-field').value
     auth.login(email, password).then(function(data) {
       this.setState({
-        'loggedIn': true
+        'loggedIn': false,
+        'error': "Incorrect email/password combination."
       })
     }.bind(this))
   }
@@ -36,24 +37,34 @@ class LoginForm extends BaseComponent {
     } else {
 
       return(
-        <Form onSubmit={ this.handleSubmit.bind(this) }>
-          <Form.Field>
-            <label>Email</label>
-            <input id='email-field' placeholder='Email' />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <PasswordMask
-              id="password-field"
-              name="password"
-              placeholder="Enter password"
-            />
-          </Form.Field>
-          <Form.Field>
-            <Checkbox label='I agree to the Terms and Conditions' />
-          </Form.Field>
-          <Button type='submit'>Submit</Button>
-        </Form>
+        <Container>
+          <h2> Log in </h2>
+          <Form onSubmit={ this.handleSubmit.bind(this) }>
+            <Form.Field>
+              { this.state && <div>
+                                { this.state.error }
+                            </div>
+              }
+            </Form.Field>
+
+            <Form.Field>
+              <label>Email</label>
+              <input id='email-field' placeholder='Email' />
+            </Form.Field>
+            <Form.Field>
+              <label>Password</label>
+              <PasswordMask
+                id="password-field"
+                name="password"
+                placeholder="Enter password"
+              />
+            </Form.Field>
+            <Form.Field>
+              <Checkbox label='I agree to the Terms and Conditions' />
+            </Form.Field>
+            <Button type='submit'>Login</Button>
+          </Form>
+        </Container>
       )
 
     }

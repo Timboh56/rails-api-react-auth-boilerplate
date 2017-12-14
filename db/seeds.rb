@@ -11,7 +11,7 @@ AdminUser.first_or_create!(email: 'admin@example.com', password: 'password', pas
 
 100.times do |i|
   Product.create!(
-    name: Faker::Lorem.sentence,
+    name: Faker::Name.unique.name,
     description: Faker::Lorem.paragraph,
     sku: "#{ Faker::Lorem.word }-#{ i }"
   )
