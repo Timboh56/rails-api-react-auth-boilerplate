@@ -1,34 +1,32 @@
 import React, { Component } from 'react'
 import BaseComponent from './BaseComponent'
 import { Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
-import Auth from './lib/Auth';
+import Auth from './actions/Auth';
+import AuthStore from './stores/AuthStore';
 import PasswordMask from 'react-password-mask';
-
 class LoginForm extends BaseComponent {
 
   componentDidMount() {
-    let loggedIn = Auth.checkUserLoggedIn().then(function(data){
-      this.setState({
-        'loggedIn': data.signed_in
-      })
-    }.bind(this));
+    AuthStore.addChangeListener(this.onChange.bind(this))
+    let loggedIn = Auth.checkUserLoggedIn().then(
+      function(data){
+        this.setState({
+          'loggedIn': data.signed_in
+        })
+      }.bind(this)
+    );
+  }
+
+  onChange() {
+    this.setState({
+      'loggedIn': AuthStore.isAuthenticated()
+    })
   }
 
   handleSubmit(e) {
     let password = document.getElementById('password-field').value
     let email = document.getElementById('email-field').value
-    Auth.login(email, password).then(function(data) {
-      if (data.signed_in && data.signed_in == false) {
-        this.setState({
-          'loggedIn': false,
-          'error': "Incorrect email/password combination."
-        })
-      } else {
-        this.setState({
-          'loggedIn': true
-        })
-      }
-    }.bind(this))
+    Auth.login(email, password)
   }
 
   render() {

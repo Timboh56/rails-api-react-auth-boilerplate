@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import BaseComponent from './BaseComponent';
 import LoadingContainer from './LoadingContainer';
-import BaseStore from './lib/BaseStore';
+import BaseStore from './stores/BaseStore';
+import ProductStore from './stores/ProductStore';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
-
-var CachedProducts = {};
 
 class ProductsIndex extends BaseComponent {
   constructor() {
@@ -18,37 +17,21 @@ class ProductsIndex extends BaseComponent {
   }
 
   getProducts () {
-    if (Object.keys(CachedProducts).length === 0 && CachedProducts.constructor === Object) {
-      BaseStore.fetch('api/products')
-        .then(products => {
-          CachedProducts['products'] = products.reduce(
-            (map, obj) => {
-              map[obj.id] = obj
-              return map
-            }, {}
-          )
-          this.setState({products: CachedProducts['products']})
-          this.getProduct(products[0].id)
-        })
-    } else {
-      this.setState({products: CachedProducts['products']})
-      let first_key = Object.keys(CachedProducts['products'])[0];
+    ProductStore.getProducts().then(data => {
+      let products = ProductStore.cachedProducts()
+      let first_key = Object.keys(products)[0];
       this.getProduct(first_key)
-    }
+    })
   }
 
   getProduct (id) {
-    var key = `product-${ id }`
-    if (CachedProducts['products'] && CachedProducts['products'][key]) {
-      this.setState({product: CachedProducts['products'][key]})
-    } else {
-      BaseStore.fetch(`api/products/${id}`)
-        .then(product => {
-          this.setState({product: product})
-          CachedProducts['products'][id]['content'] = product
-        }
+    ProductStore.getProduct(id).then(data => {
+      this.setState(
+        'products': data
       )
-    }
+    }).catch(err => {
+      this.setState()
+    })
   }
 
   renderProductLinks() {

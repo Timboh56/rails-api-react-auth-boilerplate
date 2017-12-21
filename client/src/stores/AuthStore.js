@@ -3,19 +3,32 @@
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AuthConstants from '../constants/AuthConstants';
 import { EventEmitter } from 'events';
+import BaseStore from './BaseStore';
 
 const CHANGE_EVENT = 'change';
 
-function setUser(profile, token) {
-  if (!localStorage.getItem('id_token')) {
-    localStorage.setItem('profile', JSON.stringify(profile));
-    localStorage.setItem('id_token', token);
-  }
+function loginUser(profile) {
+  return new Promise(function(fulfill, reject) {
+    BaseStore.fetch('api/sessions', {
+      method: 'POST',
+      body: {
+        user: profile
+      },
+    }).then((function(data) {
+      if (data['signed_in'] == true) {
+        BaseStore.setAuthenticationToken(data['authentication_token'])
+        localStorage.setItem(
+          'authentication-token', data['authentication_token']
+        )
+        fulfill(data)
+      } else reject(data)
+    }).bind(this))
+  });
 }
 
 function removeUser() {
   localStorage.removeItem('profile');
-  localStorage.removeItem('id_token');
+  localStorage.removeItem('authentication-token');
 }
 
 class AuthStoreClass extends EventEmitter {
@@ -32,7 +45,7 @@ class AuthStoreClass extends EventEmitter {
   }
 
   isAuthenticated() {
-    if (localStorage.getItem('id_token')) {
+    if (localStorage.getItem('authentication-token')) {
       return true;
     }
     return false;
@@ -43,7 +56,7 @@ class AuthStoreClass extends EventEmitter {
   }
 
   getJwt() {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem('authentication-token');
   }
 }
 
@@ -57,8 +70,9 @@ AuthStore.dispatchToken = AppDispatcher.register(action => {
   switch(action.actionType) {
 
     case AuthConstants.LOGIN_USER:
-      setUser(action.profile, action.token);
-      AuthStore.emitChange();
+      loginUser(action.profile).then(xhr => {
+        AuthStore.emitChange()
+      });
       break
 
     case AuthConstants.LOGOUT_USER:

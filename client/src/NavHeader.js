@@ -3,11 +3,11 @@ import { Link, Route, Switch } from 'react-router-dom';
 import ProductsIndex from './ProductsIndex';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
 import Account from './Account';
-import Auth from './lib/Auth';
+import Auth from './actions/Auth';
 import LoginForm from './LoginForm';
 
 export default class NavHeader extends React.Component {
-  state = { visible: false }
+  state = { visible: true }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
@@ -19,7 +19,7 @@ export default class NavHeader extends React.Component {
 
   render() {
     const { visible } = this.state
-    if (this.props.signed_in && this.props.signed_in == true) {
+    if (this.props.signedIn && this.props.signedIn== true) {
       return (
         <div>
           <Button onClick={this.toggleVisibility}>
@@ -30,27 +30,27 @@ export default class NavHeader extends React.Component {
               as={Menu}
               animation='overlay'
               width='thin'
-              direction='right'
+              direction='left'
               visible={ visible }
               icon='labeled'
               vertical
               inverted
             >
 
-              <Menu.Item name='home'>
+              <Menu.Item as={ Link } to='/' name='home'>
                 <Icon name='home' />
-                <Link to="/account">Account</Link>
+                Account
               </Menu.Item>
-              <Menu.Item name='home' onClick={ this.logout.bind(this) }>
-                <Icon name='logout' />
+              <Menu.Item onClick={ this.logout.bind(this) }>
+                <Icon name='arrow left' />
                 Logout
               </Menu.Item>
-              <Menu.Item name='shop'>
+              <Menu.Item as={ Link } to='/products' name='shop'>
                 <Icon name='shop' />
-                <Link to="/products">Products</Link>
+                Products
               </Menu.Item>
             </Sidebar>
-            <Sidebar.Pusher>
+            <Sidebar.Pusher value='hi'>
               { this.props.children }
             </Sidebar.Pusher>
           </Sidebar.Pushable>
@@ -73,21 +73,17 @@ export default class NavHeader extends React.Component {
               vertical
               inverted
             >
-              <Menu.Item name='home'>
+              <Menu.Item as={ Link } to='/login' name='home'>
                 <Icon name='home' />
-                <Link to="/login">Login</Link>
+                Login
               </Menu.Item>
-              <Menu.Item name='home' onClick={ this.logout.bind(this) }>
-                <Icon name='logout' />
-                <Link to="/logout">Logout</Link>
-              </Menu.Item>
-              <Menu.Item name='home'>
+              <Menu.Item as={ Link } to='/signup' name='home'>
                 <Icon name='user' />
-                <Link to="/register">Register</Link>
+                Register
               </Menu.Item>
-              <Menu.Item name='shop'>
+              <Menu.Item as={ Link } to='/products' name='shop'>
                 <Icon name='shop' />
-                <Link to="/products">Products</Link>
+                Products
               </Menu.Item>
             </Sidebar>
             <Sidebar.Pusher>

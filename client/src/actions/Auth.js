@@ -1,6 +1,8 @@
-import BaseStore from './BaseStore';
+import BaseStore from '../stores/BaseStore';
 import $ from 'jquery';
 import AuthStore from '../stores/AuthStore';
+import AppDispatcher from '../dispatcher/AppDispatcher';
+import AuthConstants from '../constants/AuthConstants';
 
 class Auth {
   constructor() {
@@ -29,22 +31,13 @@ class Auth {
 
   login(email, password) {
 
-    var opts = {
-      user: {
-        email: email,
-        password: password
+    return AppDispatcher.dispatch({
+      actionType: AuthConstants.LOGIN_USER,
+      profile: {
+        'email': email,
+        'password': password
       }
-    }
-
-    return BaseStore.fetch('api/sessions', {
-      method: 'POST',
-      body: opts,
-    }).then((function(data){
-      BaseStore.setAuthenticationToken(data['authentication_token'])
-      this.signed_in = true
-      this.email = data.email
-      return data
-    }).bind(this))
+    })
   }
 
   logout() {
@@ -53,14 +46,15 @@ class Auth {
       'email': this.email
     }
 
-    debugger
-
     return BaseStore.fetch('api/sessions', {
       method: 'DELETE',
       body: opts,
     }).then((function(data){
       BaseStore.setAuthenticationToken(null)
       this.signed_in = false
+      AppDispatcher.dispatch({
+        actionType: AuthConstants.LOGOUT_USER
+      })
       return data
     }).bind(this))
   }

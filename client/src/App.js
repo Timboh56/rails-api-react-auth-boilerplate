@@ -8,17 +8,27 @@ import LoginForm from './LoginForm';
 import Account from './Account'
 import LoadingContainer from './LoadingContainer';
 import ProductsIndex from './ProductsIndex';
-import BaseStore from './lib/BaseStore';
-import Auth from './lib/Auth';
+import Auth from './actions/Auth';
+import AuthStore from './stores/AuthStore';
 import NavHeader from './NavHeader';
 import RegistrationForm from './RegistrationForm';
 
 class App extends BaseComponent {
 
   componentDidMount() {
+    AuthStore.addChangeListener(this.onAuthChange.bind(this))
     Auth.checkUserLoggedIn().then(function(data){
-      this.setState(data)
+      this.setState({
+        'signedIn': data['signed_in'],
+        'currentUser': data['user']
+      })
     }.bind(this))
+  }
+
+  onAuthChange(data) {
+    this.setState({
+      'signedIn': AuthStore.isAuthenticated()
+    })
   }
 
   render() {
@@ -26,12 +36,12 @@ class App extends BaseComponent {
     if(this.state) {
       return(
         <Container id='layout'>
-          <NavHeader signedIn={ this.state.signed_in }>
+          <NavHeader signedIn={ this.state.signedIn }>
             <div className='main-content-container'>
               <Route path="/account" component={Account}/>
               <Route path="/products" component={ProductsIndex}/>
               <Route path="/login" component={LoginForm}/>
-              <Route path="/register" component={RegistrationForm}/>
+              <Route path="/signup" component={RegistrationForm}/>
 
               { this.props.children }
             </div>

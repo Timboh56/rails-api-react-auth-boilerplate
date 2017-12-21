@@ -44,9 +44,19 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-.main-content-container {
-  padding: 0px 150px;
-  min-height: 1000px;
+
+@media only screen and (min-width: 700px) {
+  .main-content-container {
+    padding: 0px 300px;
+    min-height: 1000px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .main-content-container {
+    padding: 0px 30px;
+    min-height: 1000px;
+  }
 }
 .ui.text.container {
   width: 30%;
