@@ -9,25 +9,34 @@ import Account from './Account'
 import LoadingContainer from './LoadingContainer';
 import ProductsIndex from './ProductsIndex';
 import Auth from './actions/Auth';
-import AuthStore from './stores/AuthStore';
+import UserStore from './stores/UserStore';
 import NavHeader from './NavHeader';
 import RegistrationForm from './RegistrationForm';
 
 class App extends BaseComponent {
+  constructor() {
+    super()
+    this.state = {}
+  }
 
-  componentDidMount() {
-    AuthStore.addChangeListener(this.onAuthChange.bind(this))
+  componentWillMount() {
+    UserStore.addChangeListener(this.onAuthChange.bind(this))
     Auth.checkUserLoggedIn().then(function(data){
       this.setState({
         'signedIn': data['signed_in'],
         'currentUser': data['user']
       })
-    }.bind(this))
+    }.bind(this)).catch(err => {
+      console.log(err)
+      this.setState({
+
+      })
+    })
   }
 
   onAuthChange(data) {
     this.setState({
-      'signedIn': AuthStore.isAuthenticated()
+      'signedIn': UserStore.isAuthenticated()
     })
   }
 

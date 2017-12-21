@@ -16,6 +16,7 @@ class SessionsController < ApiController
   def delete
     user = User.find_by(email: user_params[:email])
     sign_out(user)
+    byebug
     render json: { signed_in: false }, status: 200
   end
 

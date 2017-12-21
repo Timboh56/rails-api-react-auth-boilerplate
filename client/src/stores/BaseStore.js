@@ -1,4 +1,4 @@
-import AuthStore from '../stores/AuthStore';
+import UserStore from '../stores/UserStore';
 
 var AuthHeaders = {
   'Content-Type': 'application/json',

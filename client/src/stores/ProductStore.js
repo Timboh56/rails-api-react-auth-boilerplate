@@ -26,7 +26,7 @@ class ProductStoreClass extends EventEmitter {
         let first_key = Object.keys(CachedProducts['products'])[0];
         fulfill(CachedProducts['products'])
       }
-    })
+    }.bind(this))
   }
 
   getProduct(id) {

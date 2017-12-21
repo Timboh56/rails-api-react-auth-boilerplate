@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import BaseComponent from './BaseComponent'
 import { Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
 import Auth from './actions/Auth';
-import AuthStore from './stores/AuthStore';
+import UserStore from './stores/UserStore';
 import PasswordMask from 'react-password-mask';
+
 class LoginForm extends BaseComponent {
 
   componentDidMount() {
-    AuthStore.addChangeListener(this.onChange.bind(this))
+    UserStore.addChangeListener(this.onChange.bind(this))
     let loggedIn = Auth.checkUserLoggedIn().then(
       function(data){
         this.setState({
@@ -19,7 +20,7 @@ class LoginForm extends BaseComponent {
 
   onChange() {
     this.setState({
-      'loggedIn': AuthStore.isAuthenticated()
+      'loggedIn': UserStore.isAuthenticated()
     })
   }
 

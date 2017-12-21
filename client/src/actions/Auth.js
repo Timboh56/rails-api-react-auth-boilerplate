@@ -1,18 +1,15 @@
 import BaseStore from '../stores/BaseStore';
 import $ from 'jquery';
-import AuthStore from '../stores/AuthStore';
+import UserStore from '../stores/UserStore';
 import AppDispatcher from '../dispatcher/AppDispatcher';
 import AuthConstants from '../constants/AuthConstants';
 
 class Auth {
 
   constructor() {
-    this.signed_in = false;
     this.checkUserLoggedIn.bind(this);
     this.login.bind(this);
     this.logout.bind(this);
-
-
   }
 
   register(email, password) {
@@ -47,7 +44,7 @@ class Auth {
   }
 
   checkUserLoggedIn() {
-    return BaseStore.fetch('api/auth/is_signed_in.json')
+    return UserStore.authenticate()
   }
 }
 
