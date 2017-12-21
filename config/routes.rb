@@ -7,11 +7,12 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :products
     resources :users, only: [:create]
-    resources :sessions, only: [:create, :delete, :destroy]
+    resources :sessions, only: [:create]
 
 
     scope '/auth' do
       get 'is_signed_in', to: 'auth#is_signed_in?'
+      delete 'logout', to: 'auth#logout'
     end
   end
 

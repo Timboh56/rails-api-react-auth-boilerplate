@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
+import PasswordMask from 'react-password-mask';
 import BaseComponent from './BaseComponent'
 import { Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
-import Auth from './actions/Auth';
-import UserStore from './stores/UserStore';
-import PasswordMask from 'react-password-mask';
+import Auth from '../actions/Auth';
+import UserStore from '../stores/UserStore';
 
 class LoginForm extends BaseComponent {
 
   componentDidMount() {
     UserStore.addChangeListener(this.onChange.bind(this))
+
     let loggedIn = Auth.checkUserLoggedIn().then(
       function(data){
         this.setState({

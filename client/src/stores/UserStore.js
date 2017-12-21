@@ -18,7 +18,7 @@ function loginUser(profile) {
           'authentication-token', data['user']['authentication_token']
         )
         localStorage.setItem(
-          'profile', data['user'].toString()
+          'profile', JSON.stringify(data['user'])
         )
         fulfill(data)
       } else reject(data)
@@ -30,7 +30,7 @@ function removeUser() {
   localStorage.removeItem('profile');
   localStorage.removeItem('authentication-token');
 
-  return BaseStore.fetch('api/sessions', {
+  return BaseStore.fetch('api/auth/logout', {
     method: 'DELETE'
   })
 }
@@ -49,7 +49,7 @@ class UserStoreClass extends EventEmitter {
   }
 
   isAuthenticated() {
-    return localStorage.getItem('profile') !== undefined
+    return localStorage.getItem('profile') !== null
   }
 
   authenticate() {

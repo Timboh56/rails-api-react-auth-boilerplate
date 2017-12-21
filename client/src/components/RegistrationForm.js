@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BaseComponent from './BaseComponent'
 import { Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
-import Auth from './actions/Auth';
+import Auth from '../actions/Auth';
 import PasswordMask from 'react-password-mask';
 
 class RegistrationForm extends BaseComponent {

@@ -14,6 +14,11 @@
   color: white;
 }
 
+.ui.segment, .item {
+  margin:0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
 .App-title {
   font-size: 1.5em;
 }

@@ -3,18 +3,29 @@ import { Link, Route, Switch } from 'react-router-dom';
 import ProductsIndex from './ProductsIndex';
 import { Sidebar, Segment, Button, Menu, Image, Icon, Header } from 'semantic-ui-react'
 import Account from './Account';
-import Auth from './actions/Auth';
+import Auth from '../actions/Auth';
 import LoginForm from './LoginForm';
+import UserStore from '../stores/UserStore';
 
 export default class NavHeader extends React.Component {
+  constructor() {
+    super()
+    UserStore.addChangeListener(this.onChange.bind(this))
+  }
+
+  onChange() {
+    this.setState({
+      'signed_in': UserStore.isAuthenticated()
+    })
+
+  }
+
   state = { visible: true }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   logout() {
-    Auth.logout().then(data => {
-      debugger
-    })
+    Auth.logout()
   }
 
   render() {
@@ -22,8 +33,8 @@ export default class NavHeader extends React.Component {
     if (this.props.signedIn && this.props.signedIn== true) {
       return (
         <div>
-          <Button onClick={this.toggleVisibility}>
-            Toggle Visibility
+          <Button id='sidebar-btn' onClick={this.toggleVisibility}>
+            <Icon name='sidebar' />
           </Button>
           <Sidebar.Pushable as={Segment}>
             <Sidebar
@@ -41,13 +52,17 @@ export default class NavHeader extends React.Component {
                 <Icon name='home' />
                 Account
               </Menu.Item>
-              <Menu.Item onClick={ this.logout.bind(this) }>
-                <Icon name='arrow left' />
-                Logout
-              </Menu.Item>
               <Menu.Item as={ Link } to='/products' name='shop'>
                 <Icon name='shop' />
                 Products
+              </Menu.Item>
+              <Menu.Item as={ Link } to='/products' name='shop'>
+                <Icon name='shop' />
+                Shopping Cart
+              </Menu.Item>
+              <Menu.Item onClick={ this.logout.bind(this) }>
+                <Icon name='arrow left' />
+                Logout
               </Menu.Item>
             </Sidebar>
             <Sidebar.Pusher value='hi'>

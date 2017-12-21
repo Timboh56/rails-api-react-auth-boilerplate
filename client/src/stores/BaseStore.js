@@ -6,7 +6,7 @@ var AuthHeaders = {
   'AuthenticationToken': localStorage['authentication-token']
 }
 
-const prepareFetchOptions = function(opts) {
+var prepareFetchOptions = function(opts) {
   opts['body'] = JSON.stringify(opts['body'])
 
   if (!opts['headers'])
