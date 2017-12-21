@@ -42,7 +42,8 @@ class ProductsIndex extends BaseComponent {
     return Object.keys(products).map(
       (key) => {
         return (
-          <Button className="navlink"
+          <div
+            className="flex product-link-container"
             active={product && product.id === products[key].id}
             fluid
             key={key} onClick={
@@ -50,7 +51,7 @@ class ProductsIndex extends BaseComponent {
             }
           >
             {products[key].name}
-          </Button>
+          </div>
         )
       }
     )
@@ -69,11 +70,11 @@ class ProductsIndex extends BaseComponent {
             </Header>
           </Container>
           <Container>
-            <Button.Group fluid widths={products.length}>
+            <div class='product-links-container'>
               {
                 this.renderProductLinks.call(this)
               }
-            </Button.Group>
+            </div>
             <Divider hidden />
             { product &&
               <ProductContainer product={ product } />

@@ -8,7 +8,7 @@ class ProductContainer extends BaseComponent {
   render() {
     let product = this.props.product
     return(
-      <Container>
+      <Container className='product-container'>
         <Header as='h2'>
           {product.name}
         </Header>

@@ -14,6 +14,21 @@
   color: white;
 }
 
+.product-link-container {
+  width: 100px !important;
+  height: 100px !important;
+  float: right;
+  padding: 10px;
+  background: #eee;
+  margin: 10px;
+  display: flex;
+}
+
+.add-to-cart-button {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .ui.segment, .item {
   margin:0 !important;
   border: 0 !important;
@@ -70,11 +85,11 @@
   font-size: 0.76rem;
 }
 
-.navlink {
-  width: auto !important;
+.flex {
   display: flex;
   flex-wrap: wrap;
 }
+
 #layout {
   width: 100%;
   margin: 0;
