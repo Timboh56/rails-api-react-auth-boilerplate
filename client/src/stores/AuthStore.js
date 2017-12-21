@@ -27,8 +27,16 @@ function loginUser(profile) {
 }
 
 function removeUser() {
+
   localStorage.removeItem('profile');
   localStorage.removeItem('authentication-token');
+
+  return BaseStore.fetch('api/sessions', {
+    method: 'DELETE',
+    body: {
+      'email': this.email
+    },
+  }.bind(this))
 }
 
 class AuthStoreClass extends EventEmitter {
@@ -62,9 +70,6 @@ class AuthStoreClass extends EventEmitter {
 
 const AuthStore = new AuthStoreClass();
 
-// Here we register a callback for the dispatcher
-// and look for our various action types so we can
-// respond appropriately
 AuthStore.dispatchToken = AppDispatcher.register(action => {
 
   switch(action.actionType) {

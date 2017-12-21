@@ -21,12 +21,7 @@ const prepareFetchOptions = function(opts) {
 class BaseStore {
 
   constructor() {
-    this.setAuthenticationToken.bind(this)
     this.fetch.bind(this)
-  }
-
-  setAuthenticationToken(authenticationToken) {
-    localStorage['authentication-token'] = authenticationToken
   }
 
   fetch (endpoint, opts = {}) {

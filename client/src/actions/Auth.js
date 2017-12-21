@@ -5,6 +5,7 @@ import AppDispatcher from '../dispatcher/AppDispatcher';
 import AuthConstants from '../constants/AuthConstants';
 
 class Auth {
+
   constructor() {
     this.signed_in = false;
     this.checkUserLoggedIn.bind(this);
@@ -22,7 +23,6 @@ class Auth {
         'password': password
       },
     }).then((function(data){
-      BaseStore.setAuthenticationToken(data['authentication_token'])
       this.signed_in = true
       this.email = data.email
       return data
@@ -41,22 +41,9 @@ class Auth {
   }
 
   logout() {
-
-    var opts = {
-      'email': this.email
-    }
-
-    return BaseStore.fetch('api/sessions', {
-      method: 'DELETE',
-      body: opts,
-    }).then((function(data){
-      BaseStore.setAuthenticationToken(null)
-      this.signed_in = false
-      AppDispatcher.dispatch({
-        actionType: AuthConstants.LOGOUT_USER
-      })
-      return data
-    }).bind(this))
+    return AppDispatcher.dispatch({
+      actionType: AuthConstants.LOGOUT_USER
+    })
   }
 
   checkUserLoggedIn() {

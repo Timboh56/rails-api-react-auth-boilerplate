@@ -59,7 +59,7 @@ class ProductStoreClass extends EventEmitter {
   }
 
   cachedProducts() {
-    return CachedProducts;
+    return CachedProducts['products'];
   }
 
   emitChange() {

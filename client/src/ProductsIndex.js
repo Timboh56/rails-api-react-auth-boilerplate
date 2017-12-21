@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import BaseComponent from './BaseComponent';
-import LoadingContainer from './LoadingContainer';
 import BaseStore from './stores/BaseStore';
 import ProductStore from './stores/ProductStore';
+import BaseComponent from './BaseComponent';
+import LoadingContainer from './LoadingContainer';
+import ProductContainer from './ProductContainer';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 
 class ProductsIndex extends BaseComponent {
@@ -17,19 +18,22 @@ class ProductsIndex extends BaseComponent {
   }
 
   getProducts () {
-    ProductStore.getProducts().then(data => {
+    ProductStore.getProducts().then(function(data){
       let products = ProductStore.cachedProducts()
       let first_key = Object.keys(products)[0];
+      this.setState({
+        'products': products
+      })
       this.getProduct(first_key)
-    })
+    }.bind(this))
   }
 
   getProduct (id) {
-    ProductStore.getProduct(id).then(data => {
-      this.setState(
-        'products': data
-      )
-    }).catch(err => {
+    ProductStore.getProduct(id).then(function(data) {
+      this.setState({
+        'product': data['product']
+      })
+    }.bind(this)).catch(err => {
       this.setState()
     })
   }
@@ -39,7 +43,13 @@ class ProductsIndex extends BaseComponent {
     return Object.keys(products).map(
       (key) => {
         return (
-          <Button className="navlink" active={product && product.id === products[key].id} fluid key={key} onClick={() => this.getProduct(products[key].id)}>
+          <Button className="navlink"
+            active={product && product.id === products[key].id}
+            fluid
+            key={key} onClick={
+              () => this.getProduct(products[key].id)
+            }
+          >
             {products[key].name}
           </Button>
         )
@@ -67,10 +77,7 @@ class ProductsIndex extends BaseComponent {
             </Button.Group>
             <Divider hidden />
             { product &&
-              <Container>
-                <Header as='h2'>{product.name}</Header>
-                {product.description && <p>{product.description}</p>}
-              </Container>
+              <ProductContainer product={ product } />
             }
           </Container>
         </div>
