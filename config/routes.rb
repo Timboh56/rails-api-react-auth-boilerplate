@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  post "/graphql", to: "graphql#execute"
   devise_for :products, ActiveAdmin::Devise.config
   devise_for :users
   resources :pages
@@ -10,6 +9,7 @@ Rails.application.routes.draw do
     resources :users, only: [:create]
     resources :sessions, only: [:create]
 
+    post "graphql" => "graphqls#create"
 
     scope '/auth' do
       get 'is_signed_in', to: 'auth#is_signed_in?'

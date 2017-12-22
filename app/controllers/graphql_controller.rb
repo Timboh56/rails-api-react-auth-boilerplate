@@ -1,4 +1,4 @@
-class GraphqlController < ApplicationController
+class GraphqlController < ApiController
   def execute
     variables = ensure_hash(params[:variables])
     query = params[:query]

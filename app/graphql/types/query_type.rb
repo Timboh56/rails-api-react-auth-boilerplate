@@ -1,13 +1,13 @@
+# app/graph/types/query_type.rb
 Types::QueryType = GraphQL::ObjectType.define do
   name "Query"
-  # Add root-level fields here.
-  # They will be entry points for queries on your schema.
+  description "The query root of this schema"
 
-  # TODO: remove me
-  field :testField, types.String do
-    description "An example field added by the generator"
+  field :viewer do
+    type UserType
+    description "Current user"
     resolve ->(obj, args, ctx) {
-      "Hello World!"
+      ctx[:current_user]
     }
   end
 end
