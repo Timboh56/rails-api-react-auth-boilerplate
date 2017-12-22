@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post "/graphql", to: "graphql#execute"
   devise_for :products, ActiveAdmin::Devise.config
   devise_for :users
   resources :pages

@@ -36,6 +36,8 @@ gem 'acts-as-taggable-on', :git => 'https://github.com/mbleigh/acts-as-taggable-
 gem 'simple_token_authentication', '~> 1.0' # see semver.org
 gem 'cancancan', '~> 2.0'
 gem "paperclip", "~> 5.0.0"
+gem 'graphql'
+
 group :development do
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
