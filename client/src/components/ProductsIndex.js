@@ -70,7 +70,7 @@ class ProductsIndex extends BaseComponent {
             </Header>
           </Container>
           <Container>
-            <div class='product-links-container'>
+            <div className='product-links-container'>
               {
                 this.renderProductLinks.call(this)
               }

@@ -1,12 +1,13 @@
 import UserStore from '../stores/UserStore';
 
-var AuthHeaders = {
-  'Content-Type': 'application/json',
-  'Authorization': '36dc1091afd7d2f09d041c90f6c4e885',
-  'AuthenticationToken': localStorage['authentication-token']
-}
-
 var prepareFetchOptions = function(opts) {
+
+  var AuthHeaders = {
+    'Content-Type': 'application/json',
+    'Authorization': '36dc1091afd7d2f09d041c90f6c4e885',
+    'AuthenticationToken': localStorage['authentication-token']
+  }
+
   opts['body'] = JSON.stringify(opts['body'])
 
   if (!opts['headers'])
