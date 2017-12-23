@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   scope '/api' do
     resources :products
+    resources :posts, only: [:index, :show]
     resources :users, only: [:create, :update]
     resources :sessions, only: [:create]
 
