@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PasswordMask from 'react-password-mask';
 import BaseComponent from './BaseComponent'
-import { Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
+import { Icon, Message, Button, Checkbox, Form, Container } from 'semantic-ui-react'
 import Auth from '../actions/Auth';
 import UserStore from '../stores/UserStore';
 
@@ -34,14 +34,22 @@ class LoginForm extends BaseComponent {
   render() {
     if (this.state && this.state['loggedIn'] == true) {
       return(
-        <div classnames='flash flash-message alert alert-info'>
-          <h2> Logged In! </h2>
-        </div>
+        <Container
+          className='login-form-container'
+          >
+          <h2> Congrats! You are logged In! </h2>
+          <br />
+          <Button href='/products'>
+            <Icon name='shop' /> Shop
+          </Button>
+        </Container>
       )
     } else {
 
       return(
-        <Container>
+        <Container
+          className='login-form-container'
+          >
           <h2> Log in </h2>
           <Form onSubmit={ this.handleSubmit.bind(this) }>
               { this.state && this.state.error && <Message>

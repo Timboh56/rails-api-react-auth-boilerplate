@@ -1,0 +1,252 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.black-text {
+  color: black !important;
+}
+
+.product-link-container {
+  width: 300px !important;
+  height: 300px !important;
+  float: right;
+  padding: 10px;
+  background: #eee;
+  margin: 10px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.product-link-container:hover {
+  background: #aaa;
+}
+
+.pll {
+  margin-left: 150px;
+  padding-left: 50px;
+}
+.pvl {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
+}
+
+.mtxl {
+  margin-top: 6rem !important;
+}
+.mtl {
+  margin-top: 3rem !important;
+}
+
+.mtmd {
+  margin-top: 2rem !important;
+}
+
+.mtsm {
+  margin-top: 1rem !important;
+}
+
+.mtxs {
+  margin-top: 5px !important;
+}
+
+.transition {
+  transition: 50ms;
+}
+.unlit-button {
+  transition: 2s;
+  color: black !important;
+  background: white !important;
+}
+
+.fixed-close-button {
+  position: fixed !important;
+  font-size: 32px !important;
+  padding: 15px 20px !important;
+  border-radius: 300px !important;
+  background: #eee !important;
+  top: 30px;
+  right: 30px;
+}
+
+.close-btn:hover, .close-button:hover {
+  background: #aaa;
+}
+
+.add-to-cart-button {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+[aos="fade"] {
+  opacity: 0;
+  transition-property: opacity;
+}
+
+[aos="fade"].aos-animate {
+  opacity: 1;
+}
+
+.ui.segment, .item {
+  margin:0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.mtl, .margin-top-large {
+  margin-top: 2em;
+}
+
+.fade-component {
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.fade-component.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.todo-item {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  float: left;
+  border: solid 2px white;
+  box-sizing: border-box;
+}
+
+.faded-bg {
+  background-color: rgba(234,234,234,0.95) !important;
+}
+
+.fade-enter {
+  opacity: 0.01;
+  width: 0px;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  width: 100px;
+  transition: 700ms;
+}
+
+.fade-leave {
+  opacity: 1;
+  width: 100px;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  width: 0px;
+  transition: 700ms;
+}
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media only screen and (min-width: 700px) {
+  .main-content-container {
+    padding-top: 100px;
+    min-height: 1000px;
+    width: auto;
+  }
+
+  .product-container {
+    width: 100% !important;
+    padding: 0px 0px 0 200px;
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    left: 0px;
+  }
+
+  #nav-sidebar {
+    border: 0px;
+    padding-top: 85px !important;
+    border-radius: 0px;
+    position:fixed;
+  }
+
+  #sidebar-btn {
+    width: 150px;
+    font-size: 2.4rem !important;
+    margin: 0 auto !important;
+    color: white;
+    border-radius: 0px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: none !important;
+    z-index: 99999;
+  }
+
+  #sidebar-btn i {
+    margin: 0 auto !important;
+  }
+
+  .login-form-container {
+    width: 500px !important;
+    padding-top: 75px !important;
+  }
+
+}
+
+@media only screen and (max-width: 700px) {
+  .login-form-container {
+    padding-top: 50px;
+  }
+  .product-container {
+    position: fixed;
+    top: 0px;
+    height: 100%;
+    left: 0px;
+    padding: 0 !important;
+  }
+
+  .main-content-container {
+    padding: 0px 30px;
+    min-height: 1000px;
+  }
+}
+.ui.text.container {
+  width: 30%;
+}
+.ui.button {
+  font-size: 0.76rem;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  float: left;
+}
+
+#layout {
+  width: 100%;
+  margin: 0;
+}

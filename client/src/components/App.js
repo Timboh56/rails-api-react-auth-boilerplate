@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
-import '../App.css';
+import '../css/App.css';
 import BaseComponent from './BaseComponent';
 import LoginForm from './LoginForm';
 import Account from './Account'
@@ -46,13 +46,12 @@ class App extends BaseComponent {
       return(
         <Container id='layout'>
           <NavHeader signedIn={ this.state.signedIn }>
-            <div className='main-content-container'>
-              <Route path="/account" component={Account}/>
-              <Route path="/products" component={ProductsIndex}/>
-              <Route path="/login" component={LoginForm}/>
-              <Route path="/signup" component={RegistrationForm}/>
+            <Route path="/account" component={Account}/>
+            <Route path="/products" component={ProductsIndex}/>
+            <Route path="/login" component={LoginForm}/>
+            <Route path="/signup" component={RegistrationForm}/>
+
               { this.props.children }
-            </div>
           </NavHeader>
         </Container>
       )

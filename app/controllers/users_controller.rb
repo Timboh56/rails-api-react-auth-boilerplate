@@ -10,4 +10,12 @@ class UsersController < ApiController
     @user.save!
     render json: @user.to_json, status: 200
   end
+
+  def update
+    byebug
+    @user = User.find(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:email, :password)
 end

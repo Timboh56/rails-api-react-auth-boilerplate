@@ -4,12 +4,23 @@ import BaseComponent from './BaseComponent';
 import LoadingContainer from './LoadingContainer';
 import ProductContainer from './ProductContainer';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class ProductsIndex extends BaseComponent {
   constructor() {
     super()
+    this.onClose.bind(this)
     this.getProducts.bind(this)
     this.getProduct.bind(this)
+  }
+
+  onClose() {
+    let products = ProductStore.cachedProducts()
+
+    this.setState({
+      'product': null,
+      'products': products
+    })
   }
 
   componentDidMount () {
@@ -43,7 +54,7 @@ class ProductsIndex extends BaseComponent {
       (key) => {
         return (
           <div
-            className="flex product-link-container"
+            className="flex transition product-link-container"
             active={product && product.id === products[key].id}
             fluid
             key={key} onClick={
@@ -57,30 +68,35 @@ class ProductsIndex extends BaseComponent {
     )
   }
   render() {
-    if (this.state && this.state.products && this.state.product) {
+    if (this.state && this.state.products) {
       let { products, product } = this.state;
       return (
-        <div className='mtl'>
-          <Container text>
-            <Header as='h2' icon textAlign='center'>
-              <Icon name='cocktail' circular />
-              <Header.Content>
-                Our Wines
-              </Header.Content>
-            </Header>
-          </Container>
-          <Container>
-            <div className='product-links-container'>
-              {
-                this.renderProductLinks.call(this)
-              }
-            </div>
-            <Divider hidden />
-            { product &&
-              <ProductContainer product={ product } />
-            }
-          </Container>
-        </div>
+        <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+          <div>
+            <Container text>
+              <Header as='h2' icon>
+                <Icon name='cocktail' circular />
+                <Header.Content>
+                  Our Products
+                </Header.Content>
+              </Header>
+            </Container>
+            <Container>
+              <div className='product-links-container mtl'>
+                {
+                  this.renderProductLinks.call(this)
+                }
+              </div>
+              <Divider hidden />
+            </Container>
+          </div>
+          { product &&
+            <ProductContainer
+              product={ product }
+              onClose={ this.onClose.bind(this) }
+            />
+          }
+        </ReactCSSTransitionGroup>
       )
     } else {
       return (

@@ -7,10 +7,10 @@ const CHANGE_EVENT = 'change';
 var CachedProducts = {};
 
 class ProductStoreClass extends EventEmitter {
-  getProducts() {
+  getProducts(opts = {}) {
     return new Promise(function(fulfill, reject) {
       if (Object.keys(CachedProducts).length === 0 && CachedProducts.constructor === Object) {
-        return BaseStore.fetch('api/products')
+        return BaseStore.fetch('api/products', opts)
           .then(products => {
             CachedProducts['products'] = products.reduce(
               (map, obj) => {

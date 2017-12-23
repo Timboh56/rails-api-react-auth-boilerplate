@@ -13,6 +13,11 @@ export default class Account extends React.Component {
               Account
             </Header.Content>
           </Header>
+          <div className='row'>
+            <div className='column'>
+
+            </div>
+          </div>
         </Container>
         <Container text>
         </Container>

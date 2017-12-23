@@ -52,6 +52,26 @@ class UserStoreClass extends EventEmitter {
     return localStorage.getItem('profile') !== null
   }
 
+  updateUser(opts) {
+    let body = {
+      'user': opts
+    }
+
+    return new Promise(function(fulfill, reject) {
+      BaseStore.fetch(
+        'api/user', {
+          'method': 'PUT',
+          'body': body
+        }
+      ).then(data => {
+        if (data['signed_in']) {
+
+          fulfill(data)
+        } else reject(data)
+      })
+    }.bind(this))
+  }
+
   authenticate() {
 
     return new Promise(function(fulfill, reject) {

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   scope '/api' do
     resources :products
-    resources :users, only: [:create]
+    resources :users, only: [:create, :update]
     resources :sessions, only: [:create]
 
     post "graphql" => "graphqls#create"
