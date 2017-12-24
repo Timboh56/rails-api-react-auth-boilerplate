@@ -4,6 +4,7 @@ import BaseComponent from './BaseComponent';
 import CloseButton from './CloseButton';
 import ShoppingCartStore from '../stores/ShoppingCartStore';
 import ShoppingCartItemContainer from'./ShoppingCartItemContainer';
+import FontAwesome from 'react-fontawesome';
 
 class ShoppingCart extends BaseComponent {
 
@@ -29,7 +30,10 @@ class ShoppingCart extends BaseComponent {
     return(
       <Container id='shopping-cart-container' className='fixed'>
         <Header as='h3' className='mtxs bold'>
-          Shopping Cart
+          <FontAwesome
+            name="shopping-bag"
+          />
+          <span className='mlsm'> Shop </span>
         </Header>
         <CloseButton onClose={ onClose }/>
         <Message className='row'>
@@ -45,8 +49,8 @@ class ShoppingCart extends BaseComponent {
           </div>
         </Message>
         <Message className='row'>
-          <div className='twelve wide column'>
-            Please read our terms of service before purchasing.
+          <div className='twelve wide column small-font'>
+            Please read our <a href='/terms'>terms of service</a> before purchasing.
           </div>
         </Message>
         <div className='row bottom'>

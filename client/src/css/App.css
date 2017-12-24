@@ -72,6 +72,18 @@
   margin-top: 5px !important;
 }
 
+.mll {
+  margin-left: 3rem !important;
+}
+
+.mlmd {
+  margin-left: 2rem !important;
+}
+
+.mlsm {
+  margin-left: 1rem !important;
+}
+
 .transition {
   transition: 50ms;
 }
@@ -85,6 +97,9 @@
   font-weight: bold !important;
 }
 
+.small-font, .small-text {
+  font-size: 0.7rem;
+}
 .fixed-close-button {
   position: fixed !important;
   font-size: 20px !important;

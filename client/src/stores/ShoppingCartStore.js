@@ -4,8 +4,9 @@ import BaseStore from './BaseStore';
 import ShoppingCartConstants from '../constants/ShoppingCartConstants';
 
 const CHANGE_EVENT = 'change';
+const SHOPPING_CART_KEY = 'shopping-cart';
 
-var ShoppingCartCache = {
+var ShoppingCartCache = JSON.parse(localStorage.getItem(SHOPPING_CART_KEY)) || {
   'items': {}
 };
 
@@ -20,6 +21,7 @@ function removeFromCart(item_id, amount = 1) {
       ShoppingCartCache['items'][item_id]['quantity'] = difference
   }
 
+  localStorage.setItem(SHOPPING_CART_KEY, JSON.stringify(ShoppingCartCache));
   return true
 }
 
@@ -33,6 +35,8 @@ function addToCart(item_opts) {
     item_opts['quantity'] = 1
     ShoppingCartCache['items'][key] = item_opts
   }
+
+  localStorage.setItem(SHOPPING_CART_KEY, JSON.stringify(ShoppingCartCache));
   return true
 }
 
