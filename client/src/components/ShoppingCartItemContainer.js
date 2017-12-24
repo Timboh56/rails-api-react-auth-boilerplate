@@ -8,12 +8,12 @@ class ShoppingCartItemContainer extends BaseComponent {
     let quantity = this.props.quantity
 
     return (
-      <div className='mtsm row'>
-        <div className='column'>
-          { itemName }
+      <div className='mtxs row'>
+        <div className='column small-text'>
+          <span className='bold'>{ itemName }</span>
           <span className='float-right'>
             +
-            <span className='green-text'>
+            <span className='green-text small-text'>
               { quantity }
             </span>
           </span>

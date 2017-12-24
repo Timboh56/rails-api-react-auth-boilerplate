@@ -43,10 +43,10 @@ class ShoppingCart extends BaseComponent {
           <FontAwesome
             name="shopping-bag"
           />
-          <span className='mlsm'> Shop </span>
+          <span className='mlsm'> Shopping Cart </span>
         </Header>
         <CloseButton onClose={ onClose }/>
-        <Message className='row'>
+        <Message className='shopping-cart-item-list-container row'>
           <div className='twelve wide column'>
             <h4>
               Items

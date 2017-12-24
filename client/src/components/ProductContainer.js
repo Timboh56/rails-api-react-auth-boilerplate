@@ -54,8 +54,10 @@ class ProductContainer extends BaseComponent {
                 }
               </div>
               <br />
-
-              <div className='mtl row'>
+              <div className='mtl twelve wide column small-text'>
+                * Please read our <a href='/terms'>Terms of service</a> for more details on purchases.
+              </div>
+              <div className='row'>
                 <div className='column'>
                   <Button onClick={ onClose } className='cancel-button'>
                     <FontAwesome

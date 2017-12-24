@@ -17,6 +17,8 @@ import RegistrationForm from './RegistrationForm';
 import Blog from './Blog';
 import ShoppingCart from './ShoppingCart';
 import CheckoutContainer from './CheckoutContainer';
+import FontAwesome from 'react-fontawesome';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 const CHECKOUT_CONTAINER_ID = 'checkout-container'
 const SHOPPING_CART_ID = 'shopping-cart'
@@ -50,8 +52,7 @@ class App extends BaseComponent {
     ReactDOM.render(
       <CheckoutContainer
         onClose={ this.onCloseCheckout.bind(this) }
-      >
-      </CheckoutContainer>, document.getElementById(CHECKOUT_CONTAINER_ID));
+      />, document.getElementById(CHECKOUT_CONTAINER_ID));
   }
 
   onChangeShoppingCart() {
@@ -97,8 +98,16 @@ class App extends BaseComponent {
             <Route path="/signup" component={RegistrationForm}/>
               { this.props.children }
           </NavHeader>
-          <div id={ SHOPPING_CART_ID }></div>
-          <div id={ CHECKOUT_CONTAINER_ID }></div>
+          <ReactCSSTransitionGroup transitionName="fade" transitionEnterTimeout={700} transitionLeaveTimeout={700}>
+            <div id={ SHOPPING_CART_ID }></div>
+            <div id={ CHECKOUT_CONTAINER_ID }></div>
+            <div onClick={ this.onChangeShoppingCart.bind(this) } id='shopping-cart-button'>
+              <FontAwesome
+                name='shopping-bag'
+                className='big-text'
+              />
+            </div>
+          </ReactCSSTransitionGroup>
         </Container>
       )
     } else {
