@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import logo from '../logo.svg';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
@@ -13,11 +14,28 @@ import UserStore from '../stores/UserStore';
 import NavHeader from './NavHeader';
 import RegistrationForm from './RegistrationForm';
 import Blog from './Blog';
+import ShoppingCart from './ShoppingCart';
+import ShoppingCartStore from '../stores/ShoppingCartStore';
 
 class App extends BaseComponent {
   constructor() {
     super()
     this.state = {}
+    ShoppingCartStore.addChangeListener(this.onChangeShoppingCart.bind(this))
+  }
+
+  onCloseShoppingCart() {
+    ReactDOM.render(
+      <div>
+      </div>, document.getElementById('shopping-cart'));
+  }
+
+  onChangeShoppingCart() {
+    ReactDOM.render(
+      <ShoppingCart
+        onClose={ this.onCloseShoppingCart.bind(this) }
+      >
+      </ShoppingCart>, document.getElementById('shopping-cart'));
   }
 
   componentWillMount() {
@@ -52,9 +70,9 @@ class App extends BaseComponent {
             <Route path="/blog" component={Blog}/>
             <Route path="/login" component={LoginForm}/>
             <Route path="/signup" component={RegistrationForm}/>
-
               { this.props.children }
           </NavHeader>
+          <div id='shopping-cart'></div>
         </Container>
       )
     } else {

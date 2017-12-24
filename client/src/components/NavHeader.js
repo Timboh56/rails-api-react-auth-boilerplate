@@ -95,15 +95,15 @@ export default class NavHeader extends React.Component {
             vertical
             inverted
           >
-            <Menu.Item as={ Link } exact to='/login' name='home'>
+            <Menu.Item as={ Link } to='/login' name='home'>
               <Icon name='home' />
               Login
             </Menu.Item>
-            <Menu.Item as={ Link } exact to='/signup' name='home'>
+            <Menu.Item as={ Link } to='/signup' name='home'>
               <Icon name='user' />
               Register
             </Menu.Item>
-            <Menu.Item as={ Link } exact to='/products' name='shop'>
+            <Menu.Item as={ Link } to='/products' name='shop'>
               <Icon name='shop' />
               Products
             </Menu.Item>

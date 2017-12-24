@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import BaseComponent from './BaseComponent';
 import BaseStore from '../stores/BaseStore';
 import ProductStore from '../stores/ProductStore';
 import ShoppingCartActions from '../actions/ShoppingCartActions';
 import ShoppingCartStore from '../stores/ShoppingCartStore';
+import ShoppingCart from './ShoppingCart';
 import CloseButton from './CloseButton';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 import FontAwesome from 'react-fontawesome';
@@ -20,9 +22,7 @@ class ProductContainer extends BaseComponent {
   }
 
   onChangeShoppingCart(){
-    this.setState({
-      'addedToCart': true
-    })
+    this.props.unmount()
   }
 
   addToCart() {

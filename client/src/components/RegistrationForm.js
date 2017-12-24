@@ -26,7 +26,7 @@ class RegistrationForm extends BaseComponent {
   render() {
     if (this.state && this.state['loggedIn'] == true) {
       return(
-        <div classnames='flash flash-message alert alert-info'>
+        <div className='flash flash-message alert alert-info'>
           <h2> Succesfully registered and logged in! </h2>
         </div>
       )

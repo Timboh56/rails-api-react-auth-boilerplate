@@ -67,6 +67,7 @@ class ProductsIndex extends BaseComponent {
       }
     )
   }
+
   render() {
     if (this.state && this.state.products) {
       let { products, product } = this.state;
@@ -94,6 +95,7 @@ class ProductsIndex extends BaseComponent {
             <ProductContainer
               product={ product }
               onClose={ this.onClose.bind(this) }
+              unmount={ this.onClose.bind(this) }
             />
           }
         </ReactCSSTransitionGroup>
