@@ -85,8 +85,8 @@
   background: #aaa;
 }
 
-.add-to-cart-button {
-  font-size: 1.5rem;
+.cancel-button, .add-to-cart-button, .add-to-cart-button span {
+  font-size: 1.5rem !important;
   font-weight: bold;
 }
 
@@ -140,7 +140,7 @@
 }
 
 .faded-bg {
-  background-color: rgba(234,234,234,0.95) !important;
+  background-color: rgba(248,248,248,0.95) !important;
 }
 
 .fade-enter {

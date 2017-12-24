@@ -27,29 +27,13 @@ class ProductStoreClass extends EventEmitter {
     }.bind(this))
   }
 
-  getProduct(id) {
-    var key = `post-${ id }`
+  getPost(key) {
 
     return new Promise(function(fulfill, reject) {
       if (CachedPosts['posts'] && CachedPosts['posts'][key]) {
         fulfill(
           {
-            product: CachedPosts['posts'][key]
-          }
-        )
-      } else {
-        BaseStore.fetch(`api/posts/${id}`)
-          .then((xhr) => {
-            if (xhr.status && xhr.status != 200) {
-              reject(xhr)
-            } else {
-              fulfill(
-                {
-                  post: xhr
-                }
-              )
-              CachedPosts['posts'][id]['content'] = xhr
-            }
+            post: CachedPosts['posts'][key]
           }
         )
       }

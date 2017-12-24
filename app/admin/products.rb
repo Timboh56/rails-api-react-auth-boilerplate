@@ -4,7 +4,26 @@ ActiveAdmin.register Product do
 #
 permit_params :sku, :name, :on, :model, :tag_list, :image_attributes => [:attachment]
 
+form do |f|
+    f.semantic_errors *f.object.errors.keys
 
+    f.inputs "Details" do
+        f.input :name
+        f.input :sku
+        f.input :tag_list
+    end
+
+    f.inputs "Images" do
+        f.has_many :images, :allow_destroy => true do |l|
+            l.input :image
+        end
+    end
+
+    f.actions do
+        f.action :submit
+        f.action :cancel
+    end
+end
 #
 # or
 #

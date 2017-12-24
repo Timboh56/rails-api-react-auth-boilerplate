@@ -12,6 +12,7 @@ import Auth from '../actions/Auth';
 import UserStore from '../stores/UserStore';
 import NavHeader from './NavHeader';
 import RegistrationForm from './RegistrationForm';
+import Blog from './Blog';
 
 class App extends BaseComponent {
   constructor() {
@@ -48,6 +49,7 @@ class App extends BaseComponent {
           <NavHeader signedIn={ this.state.signedIn }>
             <Route path="/account" component={Account}/>
             <Route path="/products" component={ProductsIndex}/>
+            <Route path="/blog" component={Blog}/>
             <Route path="/login" component={LoginForm}/>
             <Route path="/signup" component={RegistrationForm}/>
 
