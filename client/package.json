@@ -14,6 +14,7 @@
     "keymirror": "^0.1.1",
     "react": "^16.1.1",
     "react-addons-css-transition-group": "^15.6.2",
+    "react-credit-cards": "^0.7.0",
     "react-dom": "^16.1.1",
     "react-fontawesome": "^1.6.1",
     "react-password-mask": "^3.2.0",

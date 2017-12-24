@@ -44,6 +44,11 @@ class ShoppingCart extends BaseComponent {
             </div>
           </div>
         </Message>
+        <Message className='row'>
+          <div className='twelve wide column'>
+            Please read our terms of service before purchasing.
+          </div>
+        </Message>
         <div className='row bottom'>
           <Button className='checkout-button bottom'>
             <Icon name='payment' /> Checkout
