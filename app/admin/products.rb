@@ -11,12 +11,15 @@ form do |f|
         f.input :name
         f.input :sku
         f.input :tag_list
+        f.input :price
+        f.input :description
+        f.input :summary
     end
 
     f.inputs "Images" do
-        f.has_many :images, :allow_destroy => true do |l|
-            l.input :image
-        end
+      f.has_many :images, as: :image_item, foreign_key: :image_item_id, :allow_destroy => true do |l|
+        l.input :image
+      end
     end
 
     f.actions do

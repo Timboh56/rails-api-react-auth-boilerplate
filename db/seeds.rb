@@ -22,7 +22,9 @@ if Rails.env.development?
     Product.create!(
       name: Faker::Name.unique.name,
       description: Faker::Lorem.paragraph,
-      sku: "#{ Faker::Lorem.word }-#{ i }"
+      summary: Faker::Lorem.sentence,
+      sku: "#{ Faker::Lorem.word }-#{ i }",
+      price: rand(100)
     )
   end
 

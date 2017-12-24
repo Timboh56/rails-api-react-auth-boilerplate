@@ -4,6 +4,7 @@ import logo from '../logo.svg';
 import { Link, Route, Switch } from 'react-router-dom';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 import '../css/App.css';
+import ShoppingCartStore from '../stores/ShoppingCartStore';
 import BaseComponent from './BaseComponent';
 import LoginForm from './LoginForm';
 import Account from './Account'
@@ -15,27 +16,51 @@ import NavHeader from './NavHeader';
 import RegistrationForm from './RegistrationForm';
 import Blog from './Blog';
 import ShoppingCart from './ShoppingCart';
-import ShoppingCartStore from '../stores/ShoppingCartStore';
+import CheckoutContainer from './CheckoutContainer';
+
+const CHECKOUT_CONTAINER_ID = 'checkout-container'
+const SHOPPING_CART_ID = 'shopping-cart'
 
 class App extends BaseComponent {
+
   constructor() {
     super()
     this.state = {}
+    this.onCloseShoppingCart.bind(this)
+    this.onCloseCheckout.bind(this)
+    this.onCheckout.bind(this)
+    this.onChangeShoppingCart.bind(this)
     ShoppingCartStore.addChangeListener(this.onChangeShoppingCart.bind(this))
   }
 
   onCloseShoppingCart() {
     ReactDOM.render(
       <div>
-      </div>, document.getElementById('shopping-cart'));
+      </div>, document.getElementById(SHOPPING_CART_ID));
+  }
+
+  onCloseCheckout() {
+    ReactDOM.render(
+      <div>
+      </div>, document.getElementById(CHECKOUT_CONTAINER_ID));
+  }
+
+  onCheckout() {
+    this.onCloseShoppingCart()
+    ReactDOM.render(
+      <CheckoutContainer
+        onClose={ this.onCloseCheckout.bind(this) }
+      >
+      </CheckoutContainer>, document.getElementById(CHECKOUT_CONTAINER_ID));
   }
 
   onChangeShoppingCart() {
     ReactDOM.render(
       <ShoppingCart
         onClose={ this.onCloseShoppingCart.bind(this) }
+        onCheckout={ this.onCheckout.bind(this) }
       >
-      </ShoppingCart>, document.getElementById('shopping-cart'));
+      </ShoppingCart>, document.getElementById(SHOPPING_CART_ID));
   }
 
   componentWillMount() {
@@ -72,7 +97,8 @@ class App extends BaseComponent {
             <Route path="/signup" component={RegistrationForm}/>
               { this.props.children }
           </NavHeader>
-          <div id='shopping-cart'></div>
+          <div id={ SHOPPING_CART_ID }></div>
+          <div id={ CHECKOUT_CONTAINER_ID }></div>
         </Container>
       )
     } else {

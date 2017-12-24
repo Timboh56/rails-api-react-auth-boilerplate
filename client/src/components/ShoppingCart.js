@@ -3,10 +3,15 @@ import { Container, Message, Header, Button, Icon, Loader, Divider } from 'seman
 import BaseComponent from './BaseComponent';
 import CloseButton from './CloseButton';
 import ShoppingCartStore from '../stores/ShoppingCartStore';
+import ShoppingCartActions from '../actions/ShoppingCartActions';
 import ShoppingCartItemContainer from'./ShoppingCartItemContainer';
 import FontAwesome from 'react-fontawesome';
 
 class ShoppingCart extends BaseComponent {
+
+  constructor() {
+    super()
+  }
 
   renderItemContainers() {
     let items = ShoppingCartStore.getItems()
@@ -17,6 +22,7 @@ class ShoppingCart extends BaseComponent {
             quantity = items[key]['quantity']
           return(
             <ShoppingCartItemContainer
+              key={ key }
               itemName={ itemName }
               quantity={ quantity}
             />
@@ -25,8 +31,12 @@ class ShoppingCart extends BaseComponent {
     )
   }
 
+  checkout() {
+    ShoppingCartActions.checkout()
+  }
+
   render() {
-    let onClose = this.props.onClose
+    let { onCheckout, onClose } = this.props
     return(
       <Container id='shopping-cart-container' className='fixed'>
         <Header as='h3' className='mtxs bold'>
@@ -54,7 +64,7 @@ class ShoppingCart extends BaseComponent {
           </div>
         </Message>
         <div className='row bottom'>
-          <Button className='checkout-button bottom'>
+          <Button onClick={ onCheckout } className='checkout-button bottom'>
             <Icon name='payment' /> Checkout
           </Button>
           <Button onClick={ onClose } className='cancel-button-small'>

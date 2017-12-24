@@ -28,13 +28,12 @@ class ProductStoreClass extends EventEmitter {
   }
 
   getProduct(id) {
-    var key = `product-${ id }`
 
     return new Promise(function(fulfill, reject) {
-      if (CachedProducts['products'] && CachedProducts['products'][key]) {
+      if (CachedProducts['products'] && CachedProducts['products'][id]) {
         fulfill(
           {
-            product: CachedProducts['products'][key]
+            product: CachedProducts['products'][id]
           }
         )
       } else {

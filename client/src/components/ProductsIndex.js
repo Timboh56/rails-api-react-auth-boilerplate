@@ -3,6 +3,7 @@ import ProductStore from '../stores/ProductStore';
 import BaseComponent from './BaseComponent';
 import LoadingContainer from './LoadingContainer';
 import ProductContainer from './ProductContainer';
+import ProductLinkContainer from './ProductLinkContainer';
 import { Container, Header, Segment, Button, Icon, Dimmer, Loader, Divider } from 'semantic-ui-react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
@@ -30,11 +31,9 @@ class ProductsIndex extends BaseComponent {
   getProducts () {
     ProductStore.getProducts().then(function(data){
       let products = ProductStore.cachedProducts()
-      let first_key = Object.keys(products)[0];
       this.setState({
         'products': products
       })
-      this.getProduct(first_key)
     }.bind(this))
   }
 
@@ -53,16 +52,10 @@ class ProductsIndex extends BaseComponent {
     return Object.keys(products).map(
       (key) => {
         return (
-          <div
-            className="flex transition product-link-container"
-            active={product && product.id === products[key].id}
-            fluid
-            key={key} onClick={
-              () => this.getProduct(products[key].id)
-            }
-          >
-            {products[key].name}
-          </div>
+          <ProductLinkContainer
+            productKey={ key }
+            onClick={ () => this.getProduct(key) }
+          />
         )
       }
     )

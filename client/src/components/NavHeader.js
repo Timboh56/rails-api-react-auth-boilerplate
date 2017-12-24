@@ -62,7 +62,7 @@ export default class NavHeader extends React.Component {
             </Menu.Item>
             <Menu.Item as={ Link } to='/products' name='shop'>
               <Icon name='shop' />
-              Shopping Cart
+              Shop
             </Menu.Item>
             <Menu.Item onClick={ this.logout.bind(this) }>
               <Icon name='arrow left' />

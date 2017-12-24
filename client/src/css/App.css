@@ -28,6 +28,7 @@
 .checkout-button {
 
 }
+
 .product-link-container {
   width: 300px !important;
   height: 300px !important;
@@ -44,6 +45,16 @@
   background: #aaa;
 }
 
+.product-summary-container {
+  bottom: 0px;
+  line-height: 1px !important;
+  height: auto;
+  max-height: auto;
+  position: relative;
+  display: block;
+  vertical-align: bottom;
+}
+
 .pll {
   margin-left: 150px;
   padding-left: 50px;
@@ -56,6 +67,7 @@
 .mtxl {
   margin-top: 6rem !important;
 }
+
 .mtl {
   margin-top: 3rem !important;
 }
@@ -84,6 +96,9 @@
   margin-left: 1rem !important;
 }
 
+.full-width {
+  width: 100% !important;
+}
 .transition {
   transition: 50ms;
 }

@@ -11,6 +11,12 @@ class ShoppingCartActions {
     this.removeFromCart.bind(this);
   }
 
+  checkout() {
+    return AppDispatcher.dispatch({
+      actionType: ShoppingCartConstants.CHECKOUT
+    })
+  }
+
   addToCart(item_opts = {}) {
     return AppDispatcher.dispatch({
       actionType: ShoppingCartConstants.ADD_TO_CART,
@@ -28,6 +34,5 @@ class ShoppingCartActions {
     })
   }
 }
-
 
 export default new ShoppingCartActions();

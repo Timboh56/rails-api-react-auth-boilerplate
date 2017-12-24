@@ -68,7 +68,9 @@ class ProductContainer extends BaseComponent {
                 </div>
               </div>
             </div>
-            <ProductImages />
+            {
+              product.images && <ProductImages images={ product.images }/>
+            }
           </div>
           <CloseButton onClose={ onClose }/>
         </ReactCSSTransitionGroup>

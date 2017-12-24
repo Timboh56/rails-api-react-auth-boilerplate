@@ -1,7 +1,7 @@
 class ProductsController < ApiController
   # GET /products
   def index
-    @products = Product.select("id, name").all
+    @products = Product.select("id, name, summary, description").all
     render json: @products.to_json
   end
 
